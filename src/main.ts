@@ -1,8 +1,19 @@
+// Import NestJS libs
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
+
+// Import application module
+import { ApplicationModule } from './application_module';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+
+  // Create application
+  const app = await NestFactory.create(ApplicationModule);
+
+  // Enable cors
+  app.enableCors()
+
+  // Start application
   await app.listen(3000);
 }
+
 bootstrap();

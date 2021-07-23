@@ -8,8 +8,6 @@ import { ConfigModule } from '@nestjs/config';
 // Import config. providers
 import { ApplicationConfigProvider } from '../../../src/configuration/providers/application/application_config_provider'
 import { ConsightConfigProvider } from '../../../src/configuration/providers/coinsight/coinsight_config_provider'
-import { LoggingConfigProvider } from '../../../src/configuration/providers/logging/logging_config_provider'
-
 // Import config. factory
 import configuration from '../../../src/configuration/configuration';
 
@@ -24,7 +22,6 @@ describe('Configuration - Test configuration providers with YAML source  - Regul
   // Test suite globals
   let applicationConfigProvider: ApplicationConfigProvider;
   let consightConfigProvider: ConsightConfigProvider;
-  let loggingConfigProvider: LoggingConfigProvider;
 
   /**
    * Load config using the Config module
@@ -38,7 +35,7 @@ describe('Configuration - Test configuration providers with YAML source  - Regul
     // Compile Module with ConfigService (improted) and config. providers
     const moduleRef = await Test.createTestingModule({
       controllers: [],
-      providers: [ApplicationConfigProvider, ConsightConfigProvider, LoggingConfigProvider],
+      providers: [ApplicationConfigProvider, ConsightConfigProvider],
       imports: [
         ConfigModule.forRoot({
           load: [configuration]
@@ -48,13 +45,10 @@ describe('Configuration - Test configuration providers with YAML source  - Regul
 
     applicationConfigProvider = moduleRef.get<ApplicationConfigProvider>(ApplicationConfigProvider);
     consightConfigProvider = moduleRef.get<ConsightConfigProvider>(ConsightConfigProvider);
-    loggingConfigProvider = moduleRef.get<LoggingConfigProvider>(LoggingConfigProvider);
   });
 
   test('Configuration - Test ApplicationConfigProvider', () => {
     // Test application related keys
-    expect(applicationConfigProvider.applicationConfigProperties.port).toBe(3000)
-    expect(applicationConfigProvider.applicationConfigProperties.hostname).toBe('0.0.0.0')
     expect(applicationConfigProvider.applicationConfigProperties.service).toBe('Coinsight API')
     expect(applicationConfigProvider.applicationConfigProperties.instance).toBe('coinsight-x')
   });
@@ -73,10 +67,5 @@ describe('Configuration - Test configuration providers with YAML source  - Regul
     expect(consightConfigProvider.coinsightConfigProperties.kraken.url).toBe('https://api.kraken.com/0')
     expect(consightConfigProvider.coinsightConfigProperties.kraken.products.length).toBe(1)
     expect(consightConfigProvider.coinsightConfigProperties.kraken.products.includes('xxbtzusd')).toBeTruthy
-  });
-
-  test('Configuration - Test ConsightConfigProvider', () => {
-    // Test logging related keys
-    expect(loggingConfigProvider.loggingConfigProperties.level).toBe('INFO')
   });
 });

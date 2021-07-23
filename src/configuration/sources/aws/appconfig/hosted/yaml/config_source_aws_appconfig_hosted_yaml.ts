@@ -31,12 +31,9 @@ export async function load_yaml_config_from_app_config_hosted(region: string, ap
             }
         ))
 
+        console.log(response)
         // Load config as utf-8 encoded yaml doc
-        let data = yaml.load(
-            (new TextDecoder('utf-8')).decode(response.Content)
-        ) as Record<string, any>;
-        console.log(data)
-        return data
+        return yaml.load((new TextDecoder('utf-8')).decode(response.Content)) as Record<string, any>;
     }
     catch(error) {
         // Reraise error

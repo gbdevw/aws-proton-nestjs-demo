@@ -8,9 +8,5 @@ import * as yaml from 'js-yaml';
  * @returns Record<string, any> - Loaded keys
  */
 export function load_yaml_config (path: string):  Record<string, any> {
-    let data = yaml.load(
-      readFileSync(path, 'utf8'),
-    ) as Record<string, any>;
-    console.log(data)
-    return data
+    return yaml.load(readFileSync(path, 'utf8')) as Record<string, any>;
 };

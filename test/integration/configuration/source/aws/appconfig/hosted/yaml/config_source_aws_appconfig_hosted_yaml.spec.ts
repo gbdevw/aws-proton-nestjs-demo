@@ -20,8 +20,6 @@ describe('Test - Configuration Source - Aws App Config', () => {
         )
 
         // Test application related keys
-        expect(config.application.port).toBe(3000)
-        expect(config.application.hostname).toBe('0.0.0.0')
         expect(config.application.service).toBe('Coinsight API')
         expect(config.application.instance).toBe('coinsight-x')
 
@@ -37,9 +35,5 @@ describe('Test - Configuration Source - Aws App Config', () => {
         expect(config.coinsight.kraken.url).toBe('https://api.kraken.com/0')
         expect(config.coinsight.kraken.products.length).toBe(1)
         expect(config.coinsight.kraken.products.includes('xxbtzusd')).toBeTruthy
-
-        
-        // Test logging related keys
-        expect(config.logging.level).toBe('INFO')
     })
 });

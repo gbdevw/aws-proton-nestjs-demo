@@ -1,6 +1,4 @@
 application:
-  port: 3000
-  hostname: '0.0.0.0'
   service: 'Coinsight API'
   instance: 'coinsight-x'
 
@@ -16,10 +14,7 @@ coinsight:
     url: 'https://api.kraken.com/0'
     products:
     - 'xxbtzusd'
-logging:
-  level: INFO
+
 tracing:
   xray:
     enabled: false
-cors:
-  enabled: false

@@ -5,7 +5,6 @@ import { ConfigModule } from '@nestjs/config';
 // Import config. providers
 import { ApplicationConfigProvider } from './providers/application/application_config_provider'
 import { ConsightConfigProvider } from './providers/coinsight/coinsight_config_provider'
-import { LoggingConfigProvider } from './providers/logging/logging_config_provider'
 
 // Import config. factory
 import configuration from './configuration';
@@ -15,12 +14,12 @@ import configuration from './configuration';
  */
 @Module({
     controllers: [],
-    providers: [ApplicationConfigProvider, ConsightConfigProvider, LoggingConfigProvider],
+    providers: [ApplicationConfigProvider, ConsightConfigProvider],
     imports: [
     ConfigModule.forRoot({
         load: [configuration]
     })
     ],
-    exports: [ApplicationConfigProvider, ConsightConfigProvider, LoggingConfigProvider]
+    exports: [ApplicationConfigProvider, ConsightConfigProvider]
 })
 export class CoinsightConfigurationModule {}

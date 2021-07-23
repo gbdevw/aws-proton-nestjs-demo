@@ -65,7 +65,7 @@ export class LoggingMiddleware implements NestMiddleware {
                 "instance": "${this.instance}", 
                 "timestamp": "${Date.now().toString()}", 
                 "correlation": "${req.get('x-correlation-id') || 'null'}",
-                "type": "api-request",
+                "type": "api-response",
                 "code": "${res.statusCode}"
             }`)
     }
